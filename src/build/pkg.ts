@@ -6,9 +6,10 @@ const outputtedFilepaths = [];
 (async()=>{
   for (const file of files) {
     console.log('Compiling',file);
-    const outFile = `${resolve(process.cwd(),'dist',`${file.split('\\').pop().split('/').pop().split('.').shift()}`)}${process.platform==='win32'?'.exe':''}`;
+    const filename = `${file.split('\\').pop().split('/').pop().split('.').shift()}${process.platform==='win32'?'.exe':''}`
+    const outFile = resolve(process.cwd(),'dist',filename);
     await pkg.exec([file,'-t','node18','--output',outFile])
-    outputtedFilepaths.push(outFile)
+    outputtedFilepaths.push(filename)
   }
   writeFileSync(resolve(process.cwd(),'dist','index.html'),`<!DOCTYPE html><html><head><title>clitools binaries for ${process.platform}</title><link rel="stylesheet" href="https://ministyles.astolfo.gay/all.css" /></head><body>
 <h1>Binaries for ${process.platform}</h1>
