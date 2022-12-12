@@ -21,7 +21,7 @@ ${outputtedFilepaths.map(v=>`<li><a href="./${v}">${v}</a></li>`).join('\n')}
 <p>
 Built at: ${new Date()}
 <br/>
-<a href="..">Go Back</a>
+<a href="../dist/">Go Back</a>
 </p>
 </body></html>`)
 })()

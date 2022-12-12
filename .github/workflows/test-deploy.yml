@@ -141,7 +141,7 @@ jobs:
           retention-days: 30
   package-macos:
     runs-on: macos-latest
-    needs: [test-ubuntu,test-macos]
+    needs: [test-macos]
     steps:
       - uses: actions/checkout@v3
       - name: Setup pnpm
