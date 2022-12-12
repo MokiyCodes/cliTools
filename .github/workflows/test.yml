@@ -148,7 +148,7 @@ jobs:
           retention-days: 30
   package-windows:
     runs-on: windows-latest
-    needs: [test-ubuntu,test-macos,test-windows]
+    needs: [test-windows]
     steps:
       - uses: actions/checkout@v3
       - name: Setup pnpm
