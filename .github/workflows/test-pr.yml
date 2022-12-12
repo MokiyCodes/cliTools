@@ -1,0 +1,176 @@
+name: Node.js Tests
+
+on:
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup pnpm
+        uses: pnpm/action-setup@0609f0983b7a228f052f81ef4c3d6510cae254ad
+        with:
+          version: 7.18.1
+      - name: Use Node.js 18
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+          cache: 'pnpm'
+      - name: Install Dependencies
+        run: pnpm install
+      - name: Build
+        run: pnpm run build
+      - name: Upload
+        uses: actions/upload-artifact@master
+        with:
+          name: js-bins
+          path: bin
+          retention-days: 5
+  test-ubuntu:
+    runs-on: ubuntu-latest
+    needs: [build]
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x, 18.x]
+    steps:
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Download JS Binaries
+        uses: actions/download-artifact@master
+        with:
+          name: js-bins
+          path: bin
+      - name: Run Tests
+        run: node bin/tests/all
+  test-macos:
+    runs-on: macos-latest
+    needs: [build]
+    strategy:
+      matrix:
+        node-version: [14.x, 18.x]
+    steps:
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Download JS Binaries
+        uses: actions/download-artifact@master
+        with:
+          name: js-bins
+          path: bin
+      - name: Run Tests
+        run: node bin/tests/all
+  test-windows:
+    runs-on: windows-latest
+    needs: [build]
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x, 18.x]
+    steps:
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Download JS Binaries
+        uses: actions/download-artifact@master
+        with:
+          name: js-bins
+          path: bin
+      - name: Run Tests
+        run: node bin/tests/all
+  package-linux:
+    runs-on: ubuntu-latest
+    needs: [test-ubuntu]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup pnpm
+        uses: pnpm/action-setup@0609f0983b7a228f052f81ef4c3d6510cae254ad
+        with:
+          version: 7.18.1
+      - name: Use Node.js 18.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - name: Download JS Binaries
+        uses: actions/download-artifact@master
+        with:
+          name: js-bins
+          path: bin
+      - name: Install Dependencies
+        run: pnpm i
+      - name: Package
+        run: pnpm compile-pkg
+      - name: Remove gitkeep
+        run: rm dist/.gitkeep
+      - name: Upload
+        uses: actions/upload-artifact@master
+        with:
+          name: linux-bin
+          path: dist
+          retention-days: 30
+  package-macos:
+    runs-on: macos-latest
+    needs: [test-ubuntu,test-macos]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup pnpm
+        uses: pnpm/action-setup@0609f0983b7a228f052f81ef4c3d6510cae254ad
+        with:
+          version: 7.18.1
+      - name: Use Node.js 18.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - name: Download JS Binaries
+        uses: actions/download-artifact@master
+        with:
+          name: js-bins
+          path: bin
+      - name: Install Dependencies
+        run: pnpm i
+      - name: Package
+        run: pnpm compile-pkg
+      - name: Remove gitkeep
+        run: rm dist/.gitkeep
+      - name: Upload
+        uses: actions/upload-artifact@master
+        with:
+          name: macos-bin
+          path: dist
+          retention-days: 30
+  package-windows:
+    runs-on: windows-latest
+    needs: [test-windows]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup pnpm
+        uses: pnpm/action-setup@0609f0983b7a228f052f81ef4c3d6510cae254ad
+        with:
+          version: 7.18.1
+      - name: Use Node.js 18.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - name: Download JS Binaries
+        uses: actions/download-artifact@master
+        with:
+          name: js-bins
+          path: bin
+      - name: Install Dependencies
+        run: pnpm i
+      - name: Package
+        run: pnpm compile-pkg
+      - name: Remove gitkeep
+        run: del dist/.gitkeep
+      - name: Upload
+        uses: actions/upload-artifact@master
+        with:
+          name: win32-bin
+          path: dist
+          retention-days: 30
