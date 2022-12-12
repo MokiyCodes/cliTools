@@ -14,9 +14,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Setup pnpm
-        uses: pnpm/action-setup@646cdf48217256a3d0b80361c5a50727664284f2
+        uses: pnpm/action-setup@0609f0983b7a228f052f81ef4c3d6510cae254ad
         with:
-          version: 6.10.0
+          version: 7.18.1
       - name: Use Node.js 18
         uses: actions/setup-node@v3
         with:
@@ -55,7 +55,7 @@ jobs:
     needs: [build]
     strategy:
       matrix:
-        node-version: [14.x, 16.x, 18.x]
+        node-version: [14.x, 18.x]
     steps:
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
@@ -92,9 +92,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Setup pnpm
-        uses: pnpm/action-setup@646cdf48217256a3d0b80361c5a50727664284f2
+        uses: pnpm/action-setup@0609f0983b7a228f052f81ef4c3d6510cae254ad
         with:
-          version: 6.10.0
+          version: 7.18.1
       - name: Use Node.js 18.x
         uses: actions/setup-node@v3
         with:
@@ -122,9 +122,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Setup pnpm
-        uses: pnpm/action-setup@646cdf48217256a3d0b80361c5a50727664284f2
+        uses: pnpm/action-setup@0609f0983b7a228f052f81ef4c3d6510cae254ad
         with:
-          version: 6.10.0
+          version: 7.18.1
       - name: Use Node.js 18.x
         uses: actions/setup-node@v3
         with:
@@ -152,9 +152,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Setup pnpm
-        uses: pnpm/action-setup@646cdf48217256a3d0b80361c5a50727664284f2
+        uses: pnpm/action-setup@0609f0983b7a228f052f81ef4c3d6510cae254ad
         with:
-          version: 6.10.0
+          version: 7.18.1
       - name: Use Node.js 18.x
         uses: actions/setup-node@v3
         with:
