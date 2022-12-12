@@ -4,7 +4,7 @@
   "description": "general cli tools",
   "main": "index.js",
   "scripts": {
-    "test": "node bin/tests",
+    "test": "node bin/tests/all",
     "build": "tsc"
   },
   "keywords": [],
