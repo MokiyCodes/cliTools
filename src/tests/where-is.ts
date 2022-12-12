@@ -3,7 +3,8 @@ import { existsSync } from "fs";
 import { resolve } from "path";
 
 const out = execSync(`node ${resolve(__dirname,'..','where-is')} node`)
-const notFound = out.toString('utf-8').split(' ').filter((_,idx)=>idx>0).map(v=>v.trim()).filter(v=>!existsSync(v)).filter(v=>{
+console.log('Received Output:',out.toString('utf-8'));
+const notFound = out.toString('utf-8').split(' ').filter((_,idx)=>idx>0).map(v=>v.trim()).filter(v=>!!v && !existsSync(v)).filter(v=>{
   try {
     execSync(`"${v}" "${resolve(__dirname,'..','util','doNothing')}"`)
   } catch (e) {
