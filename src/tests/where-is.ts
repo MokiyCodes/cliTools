@@ -3,4 +3,5 @@ import { existsSync } from "fs";
 import { resolve } from "path";
 
 const out = execSync(`node ${resolve(__dirname,'..','where-is')} node`)
-if (out.toString('utf-8').split(' ').filter((_,idx)=>idx>0).filter(v=>!existsSync(v)).length>0) throw new Error('cannot find one of the reported files')
+const notFound = out.toString('utf-8').split(' ').filter((_,idx)=>idx>0).filter(v=>!existsSync(v))
+if (notFound.length>0) throw new Error('cannot find one or more of the reported files: '+notFound.join(', '))
