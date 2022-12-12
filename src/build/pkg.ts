@@ -10,10 +10,17 @@ const outputtedFilepaths = [];
     await pkg.exec([file,'-t','node18','--output',outFile])
     outputtedFilepaths.push(outFile)
   }
-  writeFileSync(resolve(process.cwd(),'dist','index.md'),`# Binaries for ${process.platform}
+  writeFileSync(resolve(process.cwd(),'dist','index.html'),`<!DOCTYPE html><html><head><title>clitools binaries for ${process.platform}</title><link rel="stylesheet" href="https://ministyles.astolfo.gay/all.css" /></head><body>
+<h1>Binaries for ${process.platform}</h1>
 
-${outputtedFilepaths.map(v=>`- [${v}](./${v})`).join('\n')}
+<ul>
+${outputtedFilepaths.map(v=>`<li><a href="./${v}">${v}</a></li>`).join('\n')}
+</ul>
 
-> Built at: ${new Date()}<br/>
-> [Go Back](..)`)
+<p>
+Built at: ${new Date()}
+<br/>
+<a href="..">Go Back</a>
+</p>
+</body></html>`)
 })()
