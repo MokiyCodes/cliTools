@@ -30,6 +30,7 @@ jobs:
         with:
           name: js-bins
           path: bin
+          retention-days: 5
   test-ubuntu:
     runs-on: ubuntu-latest
     needs: [build]
