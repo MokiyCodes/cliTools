@@ -104,6 +104,8 @@ jobs:
         with:
           name: js-bins
           path: bin
+      - name: Install Dependencies
+        run: pnpm i
       - name: Package
         run: pnpm compile-pkg
       - name: Remove gitkeep
@@ -132,6 +134,8 @@ jobs:
         with:
           name: js-bins
           path: bin
+      - name: Install Dependencies
+        run: pnpm i
       - name: Package
         run: pnpm compile-pkg
       - name: Remove gitkeep
@@ -160,6 +164,8 @@ jobs:
         with:
           name: js-bins
           path: bin
+      - name: Install Dependencies
+        run: pnpm i
       - name: Package
         run: pnpm compile-pkg
       - name: Remove gitkeep
