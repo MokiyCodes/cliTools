@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "node bin/tests/all",
-    "build": "tsc"
+    "build": "tsc",
+    "compile-pkg": "node bin/build/pkg"
   },
   "keywords": [],
   "author": "MokiyCodes",
@@ -16,6 +17,7 @@
   },
   "devDependencies": {
     "@types/node": "^18.11.13",
+    "pkg": "^5.8.0",
     "typescript": "^4.9.4"
   }
 }
