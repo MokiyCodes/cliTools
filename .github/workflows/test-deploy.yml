@@ -131,8 +131,7 @@ jobs:
         run: pnpm i
       - name: Package
         run: pnpm compile-pkg
-      - name: Remove gitkeep
-        run: rm dist/.gitkeep
+
       - name: Upload
         uses: actions/upload-artifact@master
         with:
@@ -161,8 +160,7 @@ jobs:
         run: pnpm i
       - name: Package
         run: pnpm compile-pkg
-      - name: Remove gitkeep
-        run: rm dist/.gitkeep
+
       - name: Upload
         uses: actions/upload-artifact@master
         with:
@@ -191,8 +189,7 @@ jobs:
         run: pnpm i
       - name: Package
         run: pnpm compile-pkg
-      - name: Remove gitkeep
-        run: del dist/.gitkeep
+
       - name: Upload
         uses: actions/upload-artifact@master
         with:
