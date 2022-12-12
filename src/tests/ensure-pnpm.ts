@@ -1,4 +1,5 @@
 import { execSync } from "child_process";
+import { resolve } from "path";
 import findItemInPath from "../util/findInPath";
 
 if (findItemInPath('pnpm').length !== 0){
@@ -9,7 +10,7 @@ if (process.platform === 'win32') {
   console.warn('Cannot reliably programmatically test ensure-pnpm on win32');
   process.exit(0)
 }
-execSync('ensure-pnpm')
+execSync(`node ${resolve(__dirname,'..','ensure-pnpm')}`)
 process.env.PATH += `:${process.env.HOME}/.local/share/pnpm`
 if (findItemInPath('pnpm').length === 0)
   throw new Error('Did not install pnpm')
