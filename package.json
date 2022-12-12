@@ -1,0 +1,21 @@
+{
+  "name": "clitools",
+  "version": "1.0.0",
+  "description": "general cli tools",
+  "main": "index.js",
+  "scripts": {
+    "test": "node bin/tests",
+    "build": "tsc"
+  },
+  "keywords": [],
+  "author": "MokiyCodes",
+  "license": "MIT",
+  "bin": {
+    "where-is": "bin/where-is.js",
+    "ensure-pnpm": "bin/ensure-pnpm.js"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.13",
+    "typescript": "^4.9.4"
+  }
+}
