@@ -24,4 +24,5 @@ Built at: ${new Date()}
 <a href="../dist/">Go Back</a>
 </p>
 </body></html>`)
+  writeFileSync(resolve(process.cwd(),'dist','files.json'),JSON.stringify(outputtedFilepaths))
 })()
